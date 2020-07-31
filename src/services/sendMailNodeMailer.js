@@ -18,7 +18,6 @@ module.exports = (to, subject, html) => {
             to,
             subject,
             html
-    
         }
     
         transporter.sendMail(email, (err, result) => {
