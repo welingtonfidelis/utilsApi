@@ -13,7 +13,7 @@ module.exports = async (from, to, subject, html, cc = '') => {
         });
 
     } catch (error) {
-        console.war(
+        console.warn(
             'SENDGRID MAIL ERROR',
             (error.stack || error.message || error)
         );
