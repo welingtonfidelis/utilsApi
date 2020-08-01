@@ -45,11 +45,11 @@ routes.post('/login', async (req, res) => {
 //Rotas com validação de token
 routes.use(auth.verifyJWT);
 
-routes.post('/sendmail/nodemailer', (req, res) => {
+routes.post('/sendmail/nodemailer', async (req, res) => {
     try {
-        const { mailTo, message, subject } = req.body;
+        const { mailFrom, mailTo, message, subject } = req.body;
 
-        sendMailNodeMailer(mailTo, subject, message);
+        await sendMailNodeMailer(mailFrom, mailTo, subject, message,);
 
         res.json({ status: true });
 
@@ -68,11 +68,11 @@ routes.post('/sendmail/nodemailer', (req, res) => {
     }
 });
 
-routes.post('/sendmail/sendgrid', (req, res) => {
+routes.post('/sendmail/sendgrid', async (req, res) => {
     try {
         const { mailFrom, mailTo, message, subject } = req.body;
 
-        sendMailSendgrid(mailFrom, mailTo, subject, message);
+        await sendMailSendgrid(mailFrom, mailTo, subject, message);
 
         res.json({ status: true });
 
