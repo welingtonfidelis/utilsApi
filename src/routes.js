@@ -47,9 +47,9 @@ routes.use(auth.verifyJWT);
 
 routes.post('/sendmail/nodemailer', async (req, res) => {
     try {
-        const { mailFrom, mailTo, message, subject } = req.body;
+        const { mailFrom, mailTo, message, subject, mailCc } = req.body;
 
-        await sendMailNodeMailer(mailFrom, mailTo, subject, message,);
+        await sendMailNodeMailer(mailFrom, mailTo, subject, message, mailCc);
 
         res.json({ status: true });
 
@@ -70,9 +70,9 @@ routes.post('/sendmail/nodemailer', async (req, res) => {
 
 routes.post('/sendmail/sendgrid', async (req, res) => {
     try {
-        const { mailFrom, mailTo, message, subject } = req.body;
+        const { mailFrom, mailTo, message, subject, mailCc } = req.body;
 
-        await sendMailSendgrid(mailFrom, mailTo, subject, message);
+        await sendMailSendgrid(mailFrom, mailTo, subject, message, mailCc);
 
         res.json({ status: true });
 
