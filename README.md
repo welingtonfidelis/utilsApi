@@ -65,7 +65,7 @@ BODY
 ```
 
 ### Postman Collection
-Caso deseje importar as requisições citadas acima para o [postman], faça o donwload e importação [deste arquivo].  
+Caso deseje importar as requisições citadas acima para o [postman], faça o download e importação [deste arquivo].  
 
 ## Contato
 
