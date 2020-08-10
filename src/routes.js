@@ -6,8 +6,6 @@ const auth = require('./services/auth');
 const sendMailNodeMailer = require('./services/sendMailNodeMailer');
 const sendMailSendgrid = require('./services/sendMailSendgrid');
 
-const saltRounds = 10;
-
 routes.post('/login', async (req, res) => {
     try {
         const { user, password } = req.body;
@@ -40,7 +38,7 @@ routes.post('/login', async (req, res) => {
 
         res.status(code).json({ status: false, message });
     }
-})
+});
 
 //Rotas com validação de token
 routes.use(auth.verifyJWT);
@@ -90,5 +88,26 @@ routes.post('/sendmail/sendgrid', async (req, res) => {
         res.status(code).json({ status: false, message });
     }
 });
+
+routes.post('/count-access', async (req, res) => {
+    try {
+        console.log(req.body);
+        
+        res.json({ status: true });
+
+    } catch (error) {
+        console.error('ERROR!!!', error);
+        let code = 500;
+
+        if (error.code) {
+            code = error.code;
+            delete error.code;
+        }
+
+        const message = error.message || error.stack || error.errors || error;
+
+        res.status(code).json({ status: false, message });
+    }
+})
 
 module.exports = routes;
