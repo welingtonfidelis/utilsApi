@@ -32,17 +32,13 @@ module.exports = {
 
   production: {
     client: 'postgresql',
-    connection: {
-      database: 'my_db',
-      user:     'username',
-      password: 'password'
-    },
-    pool: {
-      min: 2,
-      max: 10
-    },
+    searchPath: 'public',
+    connection: process.env.POSTGRES_URL,
     migrations: {
-      tableName: 'knex_migrations'
+      directory: path.resolve(__dirname, 'src', 'database', 'migrations')
+    },
+    seeds: {
+      directory: path.resolve(__dirname, 'src', 'database', 'seeds')
     }
   }
 
