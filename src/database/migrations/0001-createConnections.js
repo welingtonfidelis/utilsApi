@@ -1,5 +1,5 @@
 exports.up = function(knex) {  
-    return knex.schema.createTable('connections', function(table) {
+    return knex.schema.withSchema('public').createTable('visits', function(table) {
         table.increments();
         table.string('ip').notNullable();
         table.datetime('date').notNullable();
@@ -7,5 +7,5 @@ exports.up = function(knex) {
 };
 
 exports.down = function(knex) {
-    return knex.schema.dropTable('connections');
+    return knex.schema.dropTable('visits');
 };

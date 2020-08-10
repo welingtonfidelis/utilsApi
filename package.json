@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node src/server.js"
+    "dev": "nodemon src/server.js",
+    "start": "node src/server.js",
+    "knex:migrate": "npx knex migrate:latest",
+    "knex:rollback": "npx knex migrate:rollback"
   },
   "keywords": [],
   "author": "",
@@ -20,5 +23,8 @@
     "knex": "^0.21.3",
     "nodemailer": "^6.4.11",
     "pg": "^8.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
   }
 }
