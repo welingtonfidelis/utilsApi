@@ -30,7 +30,7 @@ routes.post('/login', async (req, res) => {
         console.error('ERROR!!!', error);
         let code = 500;
 
-        if (error.code) {
+        if (error.code && Number.isInteger(error.code)) {
             code = error.code;
             delete error.code;
         }
@@ -56,7 +56,7 @@ routes.post('/sendmail/nodemailer', async (req, res) => {
         console.error('ERROR!!!', error);
         let code = 500;
 
-        if (error.code) {
+        if (error.code && Number.isInteger(error.code)) {
             code = error.code;
             delete error.code;
         }
@@ -79,7 +79,7 @@ routes.post('/sendmail/sendgrid', async (req, res) => {
         console.error('ERROR!!!', error);
         let code = 500;
 
-        if (error.code) {
+        if (error.code && Number.isInteger(error.code)) {
             code = error.code;
             delete error.code;
         }
@@ -98,30 +98,30 @@ routes.post('/visits', async (req, res) => {
         await trx('visits').insert({ ip, date: new Date() });
 
         await trx.commit();
-        res.json({ status: true });
+        return res.json({ status: true });
 
     } catch (error) {
         console.error('ERROR!!!', error);
-        
-        trx.rollback();
-        
+
+        await trx.rollback();
+
         let code = 500;
 
-        if (error.code) {
+        if (error.code && Number.isInteger(error.code)) {
             code = error.code;
             delete error.code;
         }
 
-        const message = error.message || error.stack || error.errors || error;
+        const message = error //error.message || error.stack || error.errors || error;
 
-        res.status(code).json({ status: false, message });
+        return res.status(code).json({ status: false, message });
     }
 });
 
 routes.get('/visits', async (req, res) => {
     try {
         const query = await db('visits')
-        .groupBy('id');
+            .groupBy('id');
 
         const [count] = await db('visits').count('id AS total');
 
@@ -131,7 +131,7 @@ routes.get('/visits', async (req, res) => {
         console.error('ERROR!!!', error);
         let code = 500;
 
-        if (error.code) {
+        if (error.code && Number.isInteger(error.code)) {
             code = error.code;
             delete error.code;
         }
@@ -152,7 +152,7 @@ routes.get('/visits/total', async (req, res) => {
         console.error('ERROR!!!', error);
         let code = 500;
 
-        if (error.code) {
+        if (error.code && Number.isInteger(error.code)) {
             code = error.code;
             delete error.code;
         }
