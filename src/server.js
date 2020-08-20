@@ -1,15 +1,21 @@
+require('dotenv').config();
+
 const express = require('express');
 const cors = require('cors');
 const port = 3001;
 const app = express();
 
-require('dotenv').config();
+const URL_FRONT = process.env.URL_FRONT;
+const corsOptions = {
+    origin: URL_FRONT,
+    optionsSuccessStatus: 200
+}
 
 //Aceita dados do tipo json
 app.use(express.json());
 
-//permite acesso à api de qualquer dominio 
-app.use(cors());
+//aplicação de cors
+app.use(cors(corsOptions));
 
 //roteamento
 app.use('/', require('./routes'));
