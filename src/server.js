@@ -10,13 +10,13 @@ const corsOptions = {
     origin: URL_FRONT,
     optionsSuccessStatus: 200
 }
-console.log('===>', URL_FRONT);
 
 //Aceita dados do tipo json
 app.use(express.json());
 
 //aplicação de cors
-app.use(cors(corsOptions));
+// corsOptions
+app.use(cors());
 
 //roteamento
 app.use('/', require('./routes'));
